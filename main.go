@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "log"
 
 const (
 	IMAGE_WIDTH  = 256
@@ -12,6 +13,7 @@ func main() {
 	fmt.Printf("P3\n%d %d\n255\n", IMAGE_WIDTH, IMAGE_HEIGHT)
 
 	for j := 0; j < IMAGE_HEIGHT; j++ {
+		log.Printf("\rScanlines remaining: %d ", IMAGE_HEIGHT-j)
 		for i := 0; i < IMAGE_WIDTH; i++ {
 			r := float64(i) / (IMAGE_WIDTH - 1)
 			g := float64(j) / (IMAGE_HEIGHT - 1)
@@ -25,4 +27,5 @@ func main() {
 			fmt.Printf("%d %d %d\n", ir, ig, ib)
 		}
 	}
+	log.Printf("\rDone.                \n")
 }
