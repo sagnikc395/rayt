@@ -9,7 +9,7 @@ type Vec3 struct {
 	E [3]float64
 }
 
-func (v *Vec3) NewVec3(e0, e1, e2 float64) *Vec3 {
+func NewVec3(e0, e1, e2 float64) *Vec3 {
 	return &Vec3{
 		[3]float64{e0, e1, e2},
 	}
