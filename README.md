@@ -15,3 +15,9 @@ go install github.com/sagnikc395/rayt
 make build 
 ```
 4. Binary will be present in the ```./build/``` directory.
+
+
+### Todo:
+Start reading from Section 4: Rays, a simple Camera and Background
+https://raytracing.github.io/books/RayTracingInOneWeekend.html#outputanimage/theppmimageformat
+
