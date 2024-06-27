@@ -6,7 +6,7 @@ import (
 	"github.com/sagnikc395/rayt/vec3"
 )
 
-func WriteColor(v vec3.Vec3) {
+func WriteColor(v *vec3.Vec3) {
 	r := v.X()
 	g := v.Y()
 	b := v.Z()

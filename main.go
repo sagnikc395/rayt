@@ -30,8 +30,8 @@ func main() {
 			// ib := int(255.999 * b)
 
 			// fmt.Printf("%d %d %d\n", ir, ig, ib)
-			pixel_color := vec3.NewVec3(float64(i)/IMAGE_WIDTH-1, float64(j)/IMAGE_HEIGHT-1, 0)
-			color.WriteColor(*pixel_color)
+			pixel_color := vec3.NewVec3(float64(i)/(IMAGE_WIDTH-1), float64(j)/(IMAGE_HEIGHT-1), 0)
+			color.WriteColor(pixel_color)
 		}
 	}
 	log.Printf("\rDone.                \n")
