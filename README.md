@@ -8,7 +8,7 @@ writing a raytracer in go , taken from [writing a raytracer in a weekend](https:
 2. Install rayt as
 
 ```
-go install github.com/sagnikc395/rayt
+git clone https://github.com/sagnikc395/rayt
 ```
 
 3. Build the binary
