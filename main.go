@@ -14,7 +14,7 @@ func main() {
 	aspect_ratio := 16.0 / 9.0
 	image_width := 400
 	// calc the image height ans ensure that it's atleast 1.
-	var image_height = int(image_width / int(aspect_ratio))
+	var image_height = int(float64(image_width) / aspect_ratio)
 	if image_height < 1 {
 		image_height = 1
 	}

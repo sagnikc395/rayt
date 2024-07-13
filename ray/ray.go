@@ -28,6 +28,9 @@ func (r *Ray) At(t float64) Point3 {
 }
 
 func (r *Ray) RayColor() vec3.Vec3 {
+	if r.HitSphere(vec3.NewVec3(0, 0, -1), 0.5) {
+		return *vec3.NewVec3(1, 0, 0)
+	}
 	unit_direction := r.Dir.UnitVector()
 	a := 0.5 * (unit_direction.Y() + 1.0)
 
@@ -35,5 +38,13 @@ func (r *Ray) RayColor() vec3.Vec3 {
 	exp2 := vec3.NewVec3(0.5, 0.7, 1.0)
 
 	return *vec3.VecAdd(exp1.ScaleUp(1.0-a), exp2.ScaleUp(a))
+}
 
+func (r *Ray) HitSphere(center *vec3.Vec3, radius float64) bool {
+	oc := vec3.VecSub(center, &r.Orig)
+	a := vec3.DotProduct(&r.Dir, &r.Dir)
+	b := -2.0 * vec3.DotProduct(&r.Dir, oc)
+	c := vec3.DotProduct(oc, oc) - (radius * radius)
+	discriminant := b*b - (4 * a * c)
+	return discriminant >= 0
 }
