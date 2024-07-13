@@ -36,7 +36,7 @@ func (v *Vec3) ItemAt(index int) float64 {
 	return v.E[index]
 }
 
-func (v *Vec3) Increment(v2 Vec3) *Vec3 {
+func (v *Vec3) UpdateItem(v2 Vec3) *Vec3 {
 	v.E[0] += v2.E[0]
 	v.E[1] += v2.E[1]
 	v.E[2] += v2.E[2]
@@ -61,6 +61,9 @@ func (v *Vec3) Length() float64 {
 func (v *Vec3) LengthSquared() float64 {
 	return v.E[0]*v.E[0] + v.E[1]*v.E[1] + v.E[2]*v.E[2]
 }
+
+// point3 type is just vec3, but useful for geometric clarity
+type Point3 = Vec3
 
 // utility functions for vec3
 func (v Vec3) String() string {
@@ -87,23 +90,23 @@ func VecMult(u *Vec3, v *Vec3) *Vec3 {
 	}
 }
 
-func ScalarProduct(t float64, v *Vec3) *Vec3 {
+func (v *Vec3) ScalarProduct(t float64) *Vec3 {
 	return &Vec3{
 		[3]float64{t * v.E[0], t * v.E[1], t * v.E[2]},
 	}
 }
 
-func ScalarDiv(t float64, v *Vec3) *Vec3 {
-	return ScalarProduct(1/t, v)
+func (v *Vec3) ScalarDiv(t float64) *Vec3 {
+	return v.ScalarProduct(1 / t)
 }
 
-func ScalarAdd(t float64, v *Vec3) *Vec3 {
+func (v *Vec3) ScalarAdd(t float64) *Vec3 {
 	return &Vec3{
 		[3]float64{t + v.E[0], t + v.E[1], t + v.E[2]},
 	}
 }
 
-func ScalarSub(t float64, v *Vec3) *Vec3 {
+func (v *Vec3) ScalarSub(t float64) *Vec3 {
 	return &Vec3{
 		[3]float64{v.E[0] - t, v.E[1] - t, v.E[2] - t},
 	}

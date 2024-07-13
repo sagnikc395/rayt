@@ -8,8 +8,8 @@ type Ray struct {
 	Dir  vec3.Vec3
 }
 
-func NewRay(origin Point3, direction vec3.Vec3) Ray {
-	return Ray{
+func NewRay(origin Point3, direction vec3.Vec3) *Ray {
+	return &Ray{
 		Orig: origin,
 		Dir:  direction,
 	}
@@ -19,8 +19,8 @@ func (r *Ray) Origin() Point3 {
 	return r.Orig
 }
 
-func (r *Ray) Direction() vec3.Vec3 {
-	return r.Dir
+func (r *Ray) Direction() *vec3.Vec3 {
+	return &r.Dir
 }
 
 func (r *Ray) At(t float64) Point3 {
