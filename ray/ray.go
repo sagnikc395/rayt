@@ -26,3 +26,14 @@ func (r *Ray) Direction() vec3.Vec3 {
 func (r *Ray) At(t float64) Point3 {
 	return Point3{E: vec3.VecAdd(&r.Orig, r.Dir.ScaleUp(t)).E}
 }
+
+func (r *Ray) RayColor() vec3.Vec3 {
+	unit_direction := r.Dir.UnitVector()
+	a := 0.5 * (unit_direction.Y() + 1.0)
+
+	exp1 := vec3.NewVec3(1.0, 1.0, 1.0)
+	exp2 := vec3.NewVec3(0.5, 0.7, 1.0)
+
+	return *vec3.VecAdd(exp1.ScaleUp(1.0-a), exp2.ScaleUp(a))
+
+}

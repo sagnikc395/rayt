@@ -97,6 +97,18 @@ func ScalarDiv(t float64, v *Vec3) *Vec3 {
 	return ScalarProduct(1/t, v)
 }
 
+func ScalarAdd(t float64, v *Vec3) *Vec3 {
+	return &Vec3{
+		[3]float64{t + v.E[0], t + v.E[1], t + v.E[2]},
+	}
+}
+
+func ScalarSub(t float64, v *Vec3) *Vec3 {
+	return &Vec3{
+		[3]float64{v.E[0] - t, v.E[1] - t, v.E[2] - t},
+	}
+}
+
 func DotProduct(u *Vec3, v *Vec3) float64 {
 	return u.E[0]*v.E[0] + u.E[1]*v.E[1] + u.E[2]*v.E[2]
 }
