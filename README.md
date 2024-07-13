@@ -1,6 +1,6 @@
 ## rayt
 
-writing a raytracer in go , taken from [writing a raytracer in a weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+a raytracer written in Go , taken from [writing a raytracer in a weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
 
 ### Run Locally:
 
