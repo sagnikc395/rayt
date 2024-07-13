@@ -10,18 +10,25 @@ import (
 )
 
 func RayColor(r *ray.Ray) color.Color {
-	unitDirection := r.Direction().UnitVector()
-	t := 0.5 * (unitDirection.Y() + 1.0)
+	center := vec3.NewVec3(0, 0, -1)
+	if ray.HitSphere(center, 0.5, r) {
+		// return red if ray hits the sphere
+		return vec3.NewVec3(1, 0, 0)
+	}
 
-	white := vec3.NewVec3(1.0, 1.0, 1.0)
-	blue := vec3.NewVec3(0.5, 0.7, 1.0)
+	// unitDirection := r.Direction().UnitVector()
+	// t := 0.5 * (unitDirection.Y() + 1.0)
 
-	color := vec3.VecAdd(
-		white.ScaleUp(1.0-t),
-		blue.ScaleUp(t),
-	)
+	// white := vec3.NewVec3(1.0, 1.0, 1.0)
+	// blue := vec3.NewVec3(0.5, 0.7, 1.0)
 
-	return color
+	// color := vec3.VecAdd(
+	// 	white.ScaleUp(1.0-t),
+	// 	blue.ScaleUp(t),
+	// )
+
+	// return color
+	return vec3.NewVec3(0, 0, 1)
 }
 
 func main() {
@@ -33,7 +40,7 @@ func main() {
 	// image_height := 256
 
 	//calcualte the image height, and ensure that it's at least 1
-	image_height := image_width / int(aspect_ratio)
+	image_height := int(float64(image_width) / aspect_ratio)
 	if image_height < 1 {
 		image_height = 1
 	}
@@ -67,9 +74,6 @@ func main() {
 	for j := 0; j < image_height; j++ {
 		log.Printf("\rScanlines remaining: %d ", (image_height - j))
 		for i := 0; i < image_width; i++ {
-			// 	pixel_color := vec3.NewVec3(float64(i)/(float64(image_width)-1), float64(j)/(float64(image_height)-1), 0)
-			// 	color.WriteColor(pixel_color)
-			// }
 			pixel_center := vec3.VecAdd(pixel00_loc,
 				vec3.VecAdd(pixel_delta_u.ScaleUp(float64(i)), pixel_delta_v.ScaleUp(float64(j))))
 

@@ -1,6 +1,8 @@
 package ray
 
-import "github.com/sagnikc395/rayt/vec3"
+import (
+	"github.com/sagnikc395/rayt/vec3"
+)
 
 type Point3 = vec3.Vec3
 type Ray struct {
@@ -47,4 +49,14 @@ func (r *Ray) HitSphere(center *vec3.Vec3, radius float64) bool {
 	c := vec3.DotProduct(oc, oc) - (radius * radius)
 	discriminant := b*b - (4 * a * c)
 	return discriminant >= 0
+}
+
+func HitSphere(center *vec3.Vec3, radius float64, r *Ray) bool {
+	oc := vec3.VecSub(center, &r.Orig)
+	a := vec3.DotProduct(r.Direction(), r.Direction())
+	b := -2.0 * vec3.DotProduct(r.Direction(), oc)
+	c := vec3.DotProduct(oc, oc) - radius*radius
+	discriminant := b*b - 4*a*c
+
+	return discriminant > 0
 }
