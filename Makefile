@@ -2,4 +2,4 @@ test:
 	go test -v ./...
 
 build:
-	go build -o ./dist/
+	go build -o ./dist/ 
