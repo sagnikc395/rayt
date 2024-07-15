@@ -15,7 +15,7 @@ func check(e error, s string) {
 func main() {
 	//size of image x and y
 	nx := 400
-	ny := 300
+	ny := 200
 
 	const color = 255.99
 
