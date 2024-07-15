@@ -11,7 +11,7 @@ func NewCamera() *Camera {
 	c := new(Camera)
 
 	c.lowerLeft = Vec3{-2.0, -1.0, -1.0}
-	c.horizontal = Vec3{4.0, 0., 0.0}
+	c.horizontal = Vec3{4.0, 0.0, 0.0}
 	c.vertical = Vec3{0.0, 2.0, 0.0}
 	c.origin = Vec3{0.0, 0.0, 0.0}
 
