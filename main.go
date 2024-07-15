@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math"
+	"math/rand/v2"
 	"os"
 )
 
@@ -12,12 +14,48 @@ func check(e error, s string) {
 	}
 }
 
-func main() {
-	//size of image x and y
-	nx := 400
-	ny := 200
+const (
+	nx = 400 // x
+	ny = 200 // y
+	ns = 100 // number of samples for aa
+	c  = 255.99
+)
 
-	const color = 255.99
+var (
+	white = Vec3{1.0, 1.0, 1.0}
+	blue  = Vec3{0.5, 0.7, 1.0}
+
+	camera = NewCamera()
+
+	sphere = Sphere{Vec3{0, 0, -1}, 0.5}
+	floor  = Sphere{Vec3{0, -100.5, -1}, 100}
+
+	world = World{[]Hittable{&sphere, &floor}}
+)
+
+// color method
+func color(r *Ray, h Hittable) Vec3 {
+	hit, record := h.Hit(r, 0.0, math.MaxFloat64)
+
+	if hit {
+		return record.Normal.AddScalar(1.0).MultiplyScalar(0.5)
+	}
+
+	// make unit vector so y is between -1.0 and 1.0
+	unitDirection := r.Direction.Normalize()
+
+	return gradient(&unitDirection)
+}
+
+func gradient(v *Vec3) Vec3 {
+	// scale t to be between 0.0 and 1.0
+	t := 0.5 * (v.Y + 1.0)
+
+	// linear blend: blended_value = (1 - t) * white + t * blue
+	return white.MultiplyScalar(1.0 - t).Add(blue.MultiplyScalar(t))
+}
+
+func main() {
 
 	f, err := os.Create("dist/image.ppm")
 
@@ -28,34 +66,33 @@ func main() {
 
 	check(err, "Error opening file: %v\n")
 
-	lowerLeft := Vec3{-2.0, -1.0, -1.0}
-	horizontal := Vec3{4.0, 0.0, 0.0}
-	vertical := Vec3{0.0, 2.0, 0.0}
-	origin := Vec3{0.0, 0.0, 0.0}
-
 	//render
 	// main loop to write each pixel with r/g/b bvalues
 	for j := ny - 1; j >= 0; j-- {
 		for i := 0; i < nx; i++ {
 
-			u := float64(i) / float64(nx)
-			v := float64(j) / float64(ny)
+			rgb := Vec3{}
 
-			position := horizontal.MultiplyScalar(u).Add(vertical.MultiplyScalar(v))
+			// sample rays for anti-aliasing
+			for s := 0; s < ns; s++ {
+				u := (float64(i) + rand.Float64()) / float64(nx)
+				v := (float64(j) + rand.Float64()) / float64(ny)
 
-			//direction = lowerleft + (u *horizontal) + (v * vertical)
+				r := camera.RayAt(u, v)
+				color := color(&r, &world)
+				rgb = rgb.Add(color)
+			}
 
-			direction := lowerLeft.Add(position)
+			// average
+			rgb = rgb.DivideScalar(float64(ns))
 
-			rgb := Ray{origin, direction}.Color()
-
-			//get intensity of colors
-			ir := int(color * rgb.X)
-			ig := int(color * rgb.Y)
-			ib := int(color * rgb.Z)
+			// get intensity of colors
+			ir := int(c * rgb.X)
+			ig := int(c * rgb.Y)
+			ib := int(c * rgb.Z)
 
 			_, err = fmt.Fprintf(f, "%d %d %d\n", ir, ig, ib)
-			check(err, "Error writting to file: %v\n")
+			check(err, "Error writing to file: %v\n")
 		}
 	}
 }
