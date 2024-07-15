@@ -6,7 +6,7 @@ type Ray struct {
 }
 
 // point
-func (r Ray) Point(t float64) Vec3 {
+func (r *Ray) Point(t float64) Vec3 {
 	b := r.Direction.MultiplyScalar(t)
 	a := r.Origin
 	return a.Add(b)
