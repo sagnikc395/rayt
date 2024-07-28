@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 type Vector struct {
 	X float64
@@ -46,4 +49,45 @@ func (v *Vector) length() float64 {
 
 func (v *Vector) lengthSquared() float64 {
 	return v.X*v.X + v.Y*v.Y + v.Z*v.Z
+}
+
+//vector utility functions
+
+func (v *Vector) Print() string {
+	return fmt.Sprintf("%f %f %f", v.X, v.Y, v.Z)
+}
+
+// adds 2 vector and returns a new vector instance
+func VectorAdd(v1, v2 Vector) Vector {
+	return Vector{
+		v1.X + v2.X,
+		v1.Y + v2.Y,
+		v1.Z + v2.Z,
+	}
+}
+
+// diffs 2 vector and returns a new vector instance
+func VectorDiff(v1, v2 Vector) Vector {
+	return Vector{
+		v1.X - v2.X,
+		v1.Y - v2.Y,
+		v1.Z - v2.Z,
+	}
+}
+
+// multiply 2 vectors and returns a new vector instance
+func VectorMultiply(v1, v2 Vector) Vector {
+	return Vector{
+		v1.X * v2.X,
+		v1.Y * v2.Y,
+		v1.Z * v2.Z,
+	}
+}
+
+func VectorBumpT(t float64, v Vector) Vector {
+	return Vector{
+		t * v.X,
+		t * v.Y,
+		t * v.Z,
+	}
 }
