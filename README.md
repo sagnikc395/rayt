@@ -10,11 +10,19 @@ a raytracer written in Go , taken from [writing a raytracer in a weekend](https:
 ```
 git clone https://github.com/sagnikc395/rayt
 ```
-
-3. Build the binary
+3. Install ``just``` from homebrew:
+```bash 
+brew install just
+```
+4. Build the binary
 
 ```bash
-make build
+just build 
+
+
 ```
 
-4. Binary will be present in the `./build/` directory.
+5. Run and view the image
+```bash 
+just run
+```
