@@ -115,3 +115,7 @@ func CrossProduct(v1, v2 Vector) Vector {
 		v1.X*v2.Y - (v1.Y * v2.X),
 	}
 }
+
+func UnitVector(v Vector) Vector {
+	return VectorScalarDivide(v, v.length())
+}
