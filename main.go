@@ -57,7 +57,7 @@ func gradient(v *Vec3) Vec3 {
 
 func main() {
 
-	f, err := os.Create("dist/image.ppm")
+	f, err := os.Create("./dist/image.ppm")
 
 	check(err, "Error opening file: %v\n")
 	defer f.Close()
