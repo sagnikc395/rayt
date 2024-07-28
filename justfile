@@ -1,5 +1,5 @@
 build:
-  mkdir dist/
+  mkdir -p dist/
   go build -o ./dist/rayt
 
 run:
