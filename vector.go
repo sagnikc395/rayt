@@ -91,3 +91,27 @@ func VectorBumpT(t float64, v Vector) Vector {
 		t * v.Z,
 	}
 }
+
+func VectorScalarMultiply(v Vector, t float64) Vector {
+	return Vector{
+		t * v.X,
+		t * v.Y,
+		t * v.Z,
+	}
+}
+
+func VectorScalarDivide(v Vector, t float64) Vector {
+	return VectorScalarMultiply(v, 1/t)
+}
+
+func DotProduct(v1, v2 Vector) float64 {
+	return v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z
+}
+
+func CrossProduct(v1, v2 Vector) Vector {
+	return Vector{
+		v1.Y*v2.Z - (v1.Z * v2.Y),
+		v1.Z*v2.X - (v1.X * v2.Z),
+		v1.X*v2.Y - (v1.Y * v2.X),
+	}
+}
