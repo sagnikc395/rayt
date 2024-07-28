@@ -10,7 +10,7 @@ a raytracer written in Go , taken from [writing a raytracer in a weekend](https:
 ```
 git clone https://github.com/sagnikc395/rayt
 ```
-3. Install ``just``` from homebrew:
+3. Install ```just``` from homebrew:
 ```bash 
 brew install just
 ```
