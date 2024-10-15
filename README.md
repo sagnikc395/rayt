@@ -10,19 +10,17 @@ a raytracer written in Go , taken from [writing a raytracer in a weekend](https:
 ```
 git clone https://github.com/sagnikc395/rayt
 ```
-3. Install ```just``` from homebrew:
+3. Install ```task``` from homebrew:
 ```bash 
-brew install just
+brew install go-task/tap/go-task
 ```
 4. Build the binary
 
 ```bash
-just build 
-
-
+task run build
 ```
 
 5. Run and view the image
 ```bash 
-just run
+task run
 ```
