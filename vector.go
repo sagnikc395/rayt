@@ -64,7 +64,9 @@ func (v *Vec3) lengthSquared() float64 {
 }
 
 // type Point3 is a type alias for vec3, but useful for geometric clarity
-type Point3 = Vec3
+type Point3 struct {
+	Vec3
+}
 
 // vec utility functions
 // & operator<<
@@ -74,7 +76,7 @@ func (v *Vec3) printVector() {
 
 // operator+
 func vecAdd(v1, v2 Vec3) *Vec3 {
-	return NewVec3(v1.e[0]+v2.e[0], v1.e[1]+v2.e[0], v1.e[2]+v2.e[2])
+	return NewVec3(v1.e[0]+v2.e[0], v1.e[1]+v2.e[1], v1.e[2]+v2.e[2])
 }
 
 // operator-
