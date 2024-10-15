@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 type Vec3 struct {
 	e [3]float64
@@ -58,4 +61,55 @@ func (v *Vec3) length() float64 {
 
 func (v *Vec3) lengthSquared() float64 {
 	return v.e[0]*v.e[0] + v.e[1]*v.e[1] + v.e[2]*v.e[2]
+}
+
+// type Point3 is a type alias for vec3, but useful for geometric clarity
+type Point3 = Vec3
+
+// vec utility functions
+// & operator<<
+func (v *Vec3) printVector() {
+	fmt.Printf("%f %f %f\n", v.e[0], v.e[1], v.e[2])
+}
+
+// operator+
+func vecAdd(v1, v2 Vec3) *Vec3 {
+	return NewVec3(v1.e[0]+v2.e[0], v1.e[1]+v2.e[0], v1.e[2]+v2.e[2])
+}
+
+// operator-
+func vecSub(v1, v2 Vec3) *Vec3 {
+	return NewVec3(v1.e[0]-v2.e[0], v1.e[1]-v2.e[1], v1.e[2]-v2.e[2])
+}
+
+// operator*
+func vecMult(v1, v2 Vec3) *Vec3 {
+	return NewVec3(v1.e[0]*v2.e[0], v1.e[1]*v2.e[1], v1.e[2]*v2.e[2])
+}
+
+// operator* (scalar)
+func vecMultScalar(t float64, v Vec3) *Vec3 {
+	return NewVec3(t*v.e[0], t*v.e[1], t*v.e[2])
+}
+
+// operator/
+func vecMultDivide(t float64, v Vec3) *Vec3 {
+	return vecMultScalar(1/t, v)
+}
+
+// dot product
+func dotProduct(v1, v2 Vec3) float64 {
+	return v1.e[0]*v2.e[0] + v1.e[1]*v2.e[1] + v1.e[2]*v2.e[2]
+}
+
+// cross product
+func crossProduct(v1, v2 Vec3) *Vec3 {
+	return NewVec3(v1.e[1]*v2.e[2]-v1.e[2]*v2.e[1],
+		v1.e[2]*v2.e[0]-v1.e[0]*v2.e[2],
+		v1.e[0]*v2.e[1]-v1.e[1]*v2.e[0])
+}
+
+// unit vector
+func unitVector(v Vec3) *Vec3 {
+	return vecMultDivide(v.length(), v)
 }
