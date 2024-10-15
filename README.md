@@ -17,7 +17,7 @@ brew install go-task/tap/go-task
 4. Build the binary
 
 ```bash
-task run build
+task build
 ```
 
 5. Run and view the image
