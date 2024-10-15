@@ -27,8 +27,7 @@ func main() {
 
 			// fmt.Printf("%d %d %d\n", ir, ig, ib)
 			pixelColor := Color{
-				[3]float64{i/(image_width-1),j/(image_height-1),0}
-			}
+				[3]float64{float64(i) / (float64(image_width) - 1), float64(j) / (float64(image_height) - 1), 0}}
 			writeColor(pixelColor)
 		}
 	}
