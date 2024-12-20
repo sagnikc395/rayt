@@ -2,7 +2,7 @@
 
 use std::{
     fmt,
-    ops::{Div, Index, IndexMut, Mul, Neg},
+    ops::{AddAssign, Div, Index, IndexMut, Mul, MulAssign, Neg},
 };
 
 #[derive(Debug, Clone, Copy)]
@@ -79,6 +79,8 @@ impl Neg for Vec3 {
         Vec3::new(-1 * self.e[0], -1 * self.e[1], -1 * self.e[2])
     }
 }
+
+//define / and * operations on the Vec3 type
 impl Div<f64> for Vec3 {
     type Output = Self;
 
@@ -106,5 +108,35 @@ impl Index<usize> for Vec3 {
 impl IndexMut<usize> for Vec3 {
     fn index_mut(&mut self, i: usize) -> &mut Self::Output {
         &mut self.e[i]
+    }
+}
+
+//other traits implementations for Vec3
+
+impl AddAssign for Vec3 {
+    fn add_assign(&mut self, rhs: Self) {
+        self.e[0] += rhs.e[0];
+        self.e[1] += rhs.e[1];
+        self.e[2] += rhs.e[2];
+    }
+}
+
+// for scaling up with const t
+impl Mul<Vec3> for f64 {
+    type Output = Self;
+    fn mul(self, v: Vec3) -> Vec3 {
+        v * self
+    }
+}
+
+//vector multiplication trait
+impl Mul for Vec3 {
+    type Output = Self;
+    fn mul(self, rhs: Self) -> Self {
+        Vec3::new(
+            self.e[0] * rhs.e[0],
+            self.e[1] * rhs.e[1],
+            self.e[2] * rhs.e[2],
+        )
     }
 }
