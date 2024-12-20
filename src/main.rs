@@ -15,7 +15,6 @@ use vec3::Vec3;
 // const IMAGE_HEIGHT: u16 = 256;
 // const IMAGE_WIDTH: u16 = 256;
 
-
 fn main() {
     //image
     let aspect_ratio = 16.0 / 9.0;
