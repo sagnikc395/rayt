@@ -1,6 +1,6 @@
 use crate::{
     color::Color,
-    vec3::{unit_vector, Vec3},
+    vec3::{dot, unit_vector, Vec3},
 };
 
 pub type Point3 = Vec3;
@@ -22,8 +22,8 @@ impl Ray {
 
     //getter for origin and direction
 
-    pub fn origin(&self) -> &Point3 {
-        &self.orig
+    pub fn origin(&self) -> Point3 {
+        self.orig
     }
 
     pub fn direction(&self) -> Vec3 {
@@ -41,4 +41,14 @@ pub fn ray_color(r: &Ray) -> Color {
     let a = 0.5 * (unit_direction.y() + 1.0);
     //return Color::new(0.0, 0.0, 0.0);
     return (1.0 - a) * Color::new(1.0, 1.0, 1.0) + a * Color::new(0.5, 0.7, 1.0);
+}
+
+pub fn check_hit_sphere(center: Point3, radius: f64, r: Ray) -> bool {
+    // check if it hits the sphere or not
+    let oc = center - r.origin();
+    let a = dot(r.direction(), r.direction());
+    let b = -2.0 * dot(r.direction(), oc);
+    let c = dot(oc, oc) - radius * radius;
+    let discriminant = b * b - (4.0 * a * c);
+    discriminant >= 0.0
 }
