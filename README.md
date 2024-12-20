@@ -6,3 +6,7 @@ a raytracer written in Rust , taken from [writing a raytracer in a weekend](http
 
 > we have generated the sphere colored according to its normal vectors.
 > ![Image](./image.png)
+
+### TBD
+
+- need to start from section 6.2 -> simplifying the Ray-Sphere Intersection Code.
