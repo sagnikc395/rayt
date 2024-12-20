@@ -2,6 +2,10 @@ use log::info;
 
 //use vec3
 mod vec3;
+//use color
+mod color;
+
+use color::{write_color, Color};
 
 const IMAGE_HEIGHT: u16 = 256;
 const IMAGE_WIDTH: u16 = 256;
@@ -13,17 +17,23 @@ fn main() {
     for j in 0..IMAGE_HEIGHT {
         info!(target:"rayt_events","\rScanlines remaining: {}", IMAGE_HEIGHT - j);
         for i in 0..IMAGE_WIDTH {
-            let r = i as f64 / (IMAGE_WIDTH - 1) as f64;
-            let g = j as f64 / (IMAGE_HEIGHT - 1) as f64;
-            let b = 0.0 as f64;
+            // let r = i as f64 / (IMAGE_WIDTH - 1) as f64;
+            // let g = j as f64 / (IMAGE_HEIGHT - 1) as f64;
+            // let b = 0.0 as f64;
 
-            let ir = (255.999 * r) as i32;
-            let ig = (255.999 * g) as i32;
-            let ib = (255.999 * b) as i32;
+            // let ir = (255.999 * r) as i32;
+            // let ig = (255.999 * g) as i32;
+            // let ib = (255.999 * b) as i32;
 
-            print!("{} {} {}\n", ir, ig, ib);
+            // print!("{} {} {}\n", ir, ig, ib);
+            let color = Color::new(
+                i as f64 / (IMAGE_WIDTH - 1) as f64,
+                j as f64 / (IMAGE_HEIGHT - 1) as f64,
+                0.0,
+            );
+            write_color(color);
         }
     }
 
-    info!(target:"rayt_events","\rDoen.             \n");
+    info!(target:"rayt_events","\rDone.             \n");
 }
