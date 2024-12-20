@@ -48,3 +48,19 @@ impl fmt::Display for Vec3 {
         write!(f, "{} {} {}", self.e[0], self.e[1], self.e[2])
     }
 }
+
+//dot product
+
+//cross product
+pub fn cross(u: Vec3, v: Vec3) -> Vec3 {
+    //return a new instance of the cross product
+    Vec3::new(
+        u.e[1] * v.e[2] - u.e[2] * v.e[1],
+        u.e[2] * v.e[0] - u.e[0] * v.e[2],
+        u.e[0] * v.e[1] - u.e[1] * v.e[0],
+    )
+}
+
+pub fn dot(u: Vec3, v: Vec3) -> f64 {
+    u.e[0] * v.e[0] + u.e[1] * v.e[1] + u.e[2] * v.e[2]
+}
