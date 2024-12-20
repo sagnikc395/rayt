@@ -2,7 +2,7 @@
 
 use std::{
     fmt,
-    ops::{AddAssign, Div, Index, IndexMut, Mul, MulAssign, Neg},
+    ops::{Add, AddAssign, Div, Index, IndexMut, Mul, MulAssign, Neg, Sub},
 };
 
 #[derive(Debug, Clone, Copy)]
@@ -76,11 +76,11 @@ impl Neg for Vec3 {
     //filled from error description to satisfy
     type Output = Self;
     fn neg(self) -> Self {
-        Vec3::new(-1 * self.e[0], -1 * self.e[1], -1 * self.e[2])
+        Vec3::new(-self.e[0], -self.e[1], -self.e[2])
     }
 }
 
-//define / and * operations on the Vec3 type
+//define /  operations on the Vec3 type
 impl Div<f64> for Vec3 {
     type Output = Self;
 
@@ -88,17 +88,10 @@ impl Div<f64> for Vec3 {
         self * (1.0 / t)
     }
 }
-impl Mul<f64> for Vec3 {
-    type Output = Self;
-
-    fn mul(self, t: f64) -> Self {
-        Vec3::new(self.e[0] * t, self.e[1] * t, self.e[2] * t)
-    }
-}
 
 //implement indexing operator for Vec3
 impl Index<usize> for Vec3 {
-    type Output = Self;
+    type Output = f64;
 
     fn index(&self, i: usize) -> &Self::Output {
         &self.e[i]
@@ -123,9 +116,16 @@ impl AddAssign for Vec3 {
 
 // for scaling up with const t
 impl Mul<Vec3> for f64 {
-    type Output = Self;
+    type Output = Vec3;
     fn mul(self, v: Vec3) -> Vec3 {
         v * self
+    }
+}
+
+impl Mul<f64> for Vec3 {
+    type Output = Self;
+    fn mul(self, t: f64) -> Self {
+        Vec3::new(self.e[0] * t, self.e[1] * t, self.e[2] * t)
     }
 }
 
@@ -137,6 +137,29 @@ impl Mul for Vec3 {
             self.e[0] * rhs.e[0],
             self.e[1] * rhs.e[1],
             self.e[2] * rhs.e[2],
+        )
+    }
+}
+
+//define add and sub traits
+impl Add for Vec3 {
+    type Output = Self;
+    fn add(self, other: Self) -> Self {
+        Vec3::new(
+            self.e[0] + other.e[0],
+            self.e[1] + other.e[1],
+            self.e[2] + other.e[2],
+        )
+    }
+}
+
+impl Sub for Vec3 {
+    type Output = Self;
+    fn sub(self, other: Self) -> Self {
+        Vec3::new(
+            self.e[0] - other.e[0],
+            self.e[1] - other.e[1],
+            self.e[2] - other.e[2],
         )
     }
 }
