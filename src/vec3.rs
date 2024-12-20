@@ -1,6 +1,9 @@
 //underlying storage
 
-use std::fmt;
+use std::{
+    fmt,
+    ops::{Div, Index, IndexMut, Mul, Neg},
+};
 
 #[derive(Debug, Clone, Copy)]
 pub struct Vec3 {
@@ -49,8 +52,6 @@ impl fmt::Display for Vec3 {
     }
 }
 
-//dot product
-
 //cross product
 pub fn cross(u: Vec3, v: Vec3) -> Vec3 {
     //return a new instance of the cross product
@@ -60,7 +61,50 @@ pub fn cross(u: Vec3, v: Vec3) -> Vec3 {
         u.e[0] * v.e[1] - u.e[1] * v.e[0],
     )
 }
-
+//dot product
 pub fn dot(u: Vec3, v: Vec3) -> f64 {
     u.e[0] * v.e[0] + u.e[1] * v.e[1] + u.e[2] * v.e[2]
+}
+
+//get the unit vector
+pub fn unit_vector(v: Vec3) -> Vec3 {
+    v / v.length()
+}
+
+//implement the traits for various operators
+impl Neg for Vec3 {
+    //filled from error description to satisfy
+    type Output = Self;
+    fn neg(self) -> Self {
+        Vec3::new(-1 * self.e[0], -1 * self.e[1], -1 * self.e[2])
+    }
+}
+impl Div<f64> for Vec3 {
+    type Output = Self;
+
+    fn div(self, t: f64) -> Self {
+        self * (1.0 / t)
+    }
+}
+impl Mul<f64> for Vec3 {
+    type Output = Self;
+
+    fn mul(self, t: f64) -> Self {
+        Vec3::new(self.e[0] * t, self.e[1] * t, self.e[2] * t)
+    }
+}
+
+//implement indexing operator for Vec3
+impl Index<usize> for Vec3 {
+    type Output = Self;
+
+    fn index(&self, i: usize) -> &Self::Output {
+        &self.e[i]
+    }
+}
+
+impl IndexMut<usize> for Vec3 {
+    fn index_mut(&mut self, i: usize) -> &mut Self::Output {
+        &mut self.e[i]
+    }
 }
