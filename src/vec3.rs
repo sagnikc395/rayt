@@ -1,4 +1,8 @@
 //underlying storage
+
+use std::fmt;
+
+#[derive(Debug, Clone, Copy)]
 pub struct Vec3 {
     e: [f64; 3],
 }
@@ -34,5 +38,13 @@ impl Vec3 {
 
     pub fn length_squared(&self) -> f64 {
         self.e[0] * self.e[0] + self.e[1] * self.e[1] + self.e[2] * self.e[2]
+    }
+}
+
+//implement the display
+impl fmt::Display for Vec3 {
+    //implement the fmt
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{} {} {}", self.e[0], self.e[1], self.e[2])
     }
 }
