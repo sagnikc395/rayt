@@ -6,6 +6,7 @@ mod vec3;
 mod color;
 
 use color::{write_color, Color};
+use vec3::Vec3;
 
 const IMAGE_HEIGHT: u16 = 256;
 const IMAGE_WIDTH: u16 = 256;
