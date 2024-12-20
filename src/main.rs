@@ -1,5 +1,8 @@
 use log::info;
 
+//use vec3
+mod vec3;
+
 const IMAGE_HEIGHT: u16 = 256;
 const IMAGE_WIDTH: u16 = 256;
 
