@@ -79,3 +79,5 @@ pub fn hit_sphere(center: Point3, radius: f64, r: &Ray) -> f64 {
         return (-b - discriminant.sqrt()) / 2.0 * a;
     }
 }
+
+

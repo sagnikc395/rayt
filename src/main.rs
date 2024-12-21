@@ -8,6 +8,12 @@ mod color;
 //use Ray
 mod ray;
 
+//hittable
+mod hittable;
+
+// sphere
+mod sphere;
+
 use color::{write_color, Color};
 use ray::{ray_color, Point3, Ray};
 use vec3::Vec3;
