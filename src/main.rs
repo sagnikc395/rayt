@@ -51,7 +51,7 @@ fn main() {
     //image height now calculate from aspect ratio and maintining that it's atleast 1
     let mut image_height = image_width / aspect_ratio as i32;
     //reset if 0, then set to 1
-    if image_height < 0 {
+    if image_height < 1 {
         image_height = 1
     } else {
         image_height = image_height

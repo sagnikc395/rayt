@@ -1,9 +1,4 @@
-use crate::{
-    color::Color,
-    hittable::{HitRecord, Hittable},
-    rayt_consts::infinity,
-    vec3::{dot, unit_vector, Vec3},
-};
+use crate::vec3::{dot, Vec3};
 
 pub type Point3 = Vec3;
 
