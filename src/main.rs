@@ -1,31 +1,47 @@
+use std::rc::Rc;
+
+use hittable::{HitRecord, Hittable};
+use hittable_list::HittableList;
 use log::info;
 
 //use vec3
 mod vec3;
 //use color
 mod color;
-
 //use Ray
 mod ray;
-
 //hittable
 mod hittable;
-
 // sphere
 mod sphere;
-
 //list of hittable objects
 mod hittable_list;
-
 //list of common constants
 mod rayt_consts;
 
 use color::{write_color, Color};
-use ray::{ray_color, Point3, Ray};
-use vec3::Vec3;
+use ray::{Point3, Ray};
+use rayt_consts::infinity;
+use sphere::Sphere;
+use vec3::{unit_vector, Vec3};
 
-// const IMAGE_HEIGHT: u16 = 256;
-// const IMAGE_WIDTH: u16 = 256;
+pub fn ray_color(r: &Ray, world: &dyn Hittable) -> Color {
+    let mut rec = HitRecord::new();
+
+    if world.hit(r, 0.0, infinity, &mut rec) {
+        return Vec3::new(
+            0.5 * (rec.normal.x() + 1.0),
+            0.5 * (rec.normal.y() + 1.0),
+            0.5 * (rec.normal.z() + 1.0),
+        );
+    }
+
+    let unit_direction: Vec3 = unit_vector(r.direction());
+    let a = 0.5 * (unit_direction.y() + 1.0);
+    let white = Vec3::new(1.0, 1.0, 1.0);
+    let light_blue = Vec3::new(0.5, 0.7, 1.0);
+    white * (1.0 - a) + light_blue * a
+}
 
 fn main() {
     //image
@@ -41,8 +57,14 @@ fn main() {
         image_height = image_height
     }
 
-    //setup camera
+    //world
+    let mut world = HittableList::new();
 
+    // Add spheres to the world (corrected syntax)
+    world.add(Rc::new(Sphere::new(Point3::new(0.0, 0.0, -1.0), 0.5)));
+
+    world.add(Rc::new(Sphere::new(Point3::new(0.0, -100.5, -1.0), 100.0)));
+    //setup camera
     let focal_length = 1.0;
     let viewport_height = 2.0;
     let viewport_width = viewport_height * (image_width / image_height) as f64;
@@ -67,34 +89,13 @@ fn main() {
     for j in 0..image_height {
         info!(target:"rayt_events","\rScanlines remaining: {}", image_height - j);
         for i in 0..image_width {
-            // let r = i as f64 / (IMAGE_WIDTH - 1) as f64;
-            // let g = j as f64 / (IMAGE_HEIGHT - 1) as f64;
-            // let b = 0.0 as f64;
-
-            // let ir = (255.999 * r) as i32;
-            // let ig = (255.999 * g) as i32;
-            // let ib = (255.999 * b) as i32;
-
-            // print!("{} {} {}\n", ir, ig, ib);
-            // let color = Color::new(
-            //     i as f64 / (image_width - 1) as f64,
-            //     j as f64 / (image_height - 1) as f64,
-            //     0.0,
-            // );
-            // write_color(color);
-
             let pixel_center =
                 pixel00_loc + (i as f64 * pixel_delta_u) + (j as f64 * pixel_delta_v);
-
             let ray_direction = pixel_center - camera_center;
-
             let ray = Ray::new(camera_center, ray_direction);
-
-            let pixel_color: Color = ray_color(&ray);
-
+            let pixel_color: Color = ray_color(&ray, &mut world);
             write_color(pixel_color);
         }
     }
-
     info!(target:"rayt_events","\rDone.             \n");
 }
