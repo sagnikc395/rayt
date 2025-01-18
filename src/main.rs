@@ -18,6 +18,8 @@ mod sphere;
 mod hittable_list;
 //list of common constants
 mod rayt_consts;
+//interval class
+mod interval;
 
 use color::{write_color, Color};
 use ray::{Point3, Ray};
