@@ -2,7 +2,7 @@
 
 use std::{
     fmt,
-    ops::{Add, AddAssign, Div, Index, IndexMut, Mul, MulAssign, Neg, Sub},
+    ops::{Add, AddAssign, Div, Index, IndexMut, Mul, Neg, Sub},
 };
 
 #[derive(Debug, Clone, Copy)]

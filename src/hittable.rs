@@ -18,6 +18,14 @@ pub trait Hittable {
 }
 
 impl HitRecord {
+    pub fn new() -> Self {
+        Self {
+            p: Point3::new(0.0, 0.0, 0.0),
+            normal: Vec3::new(0.0, 0.0, 0.0),
+            t: 0.0,
+            front_face: false,
+        }
+    }
     pub fn set_face_normal(self, r: &Ray, outward_normal: &Vec3) {
         //setting the hit record normal vector
         //outward normal is assumed to have unit length
