@@ -7,8 +7,14 @@ a raytracer written in Rust , taken from [writing a raytracer in a weekend](http
 ~~> we have generated the sphere colored according to its normal vectors.~~
 
 > we have a resulting render of normals-colored sphere with ground.
-> ![Image](./image.png)
+> ![Image](./image.jpg)
 
-### TBD
+### Workflow
 
-- need to start from section 6.2 -> simplifying the Ray-Sphere Intersection Code.
+```sh
+cargo run > etc/image.ppm
+```
+
+```python
+python convert.py etc/image.ppm > image.jpg
+```
