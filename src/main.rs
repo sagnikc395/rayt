@@ -14,6 +14,9 @@ mod hittable;
 // sphere
 mod sphere;
 
+//list of hittable objects
+mod hittable_list;
+
 use color::{write_color, Color};
 use ray::{ray_color, Point3, Ray};
 use vec3::Vec3;
