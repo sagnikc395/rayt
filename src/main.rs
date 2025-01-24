@@ -1,5 +1,7 @@
 use log::info;
 
+mod vec3;
+
 fn main() {
     //generate a PPM image format
     let image_width: i32 = 256;
