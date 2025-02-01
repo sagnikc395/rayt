@@ -1,4 +1,5 @@
 use crate::{
+    interval::Interval,
     ray::{Point3, Ray},
     vec3::{dot, Vec3},
 };
@@ -14,7 +15,8 @@ pub struct HitRecord {
 
 // virtual in cpp akin to a interface -> so we define it as a trait
 pub trait Hittable {
-    fn hit(&self, r: &Ray, ray_tmin: f64, ray_tmax: f64, recc: &mut HitRecord) -> bool;
+    // fn hit(&self, r: &Ray, ray_tmin: f64, ray_tmax: f64, recc: &mut HitRecord) -> bool;
+    fn hit(&self, r: &Ray, ray_t: Interval, rec: &mut HitRecord) -> bool;
 }
 
 impl HitRecord {

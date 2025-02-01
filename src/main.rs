@@ -2,6 +2,7 @@ use std::rc::Rc;
 
 use hittable::{HitRecord, Hittable};
 use hittable_list::HittableList;
+use interval::Interval;
 use log::info;
 
 //use vec3
@@ -30,7 +31,15 @@ use vec3::{unit_vector, Vec3};
 pub fn ray_color(r: &Ray, world: &dyn Hittable) -> Color {
     let mut rec = HitRecord::new();
 
-    if world.hit(r, 0.0, infinity, &mut rec) {
+    // if world.hit(r, 0.0, infinity, &mut rec) {
+    //     return Vec3::new(
+    //         0.5 * (rec.normal.x() + 1.0),
+    //         0.5 * (rec.normal.y() + 1.0),
+    //         0.5 * (rec.normal.z() + 1.0),
+    //     );
+    // }
+
+    if world.hit(r, Interval::new(0.0, infinity), &mut rec) {
         return Vec3::new(
             0.5 * (rec.normal.x() + 1.0),
             0.5 * (rec.normal.y() + 1.0),

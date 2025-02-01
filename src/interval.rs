@@ -1,8 +1,8 @@
 use core::f64;
 
 pub struct Interval {
-    max: f64,
-    min: f64,
+    pub max: f64,
+    pub min: f64,
 }
 
 impl Interval {
