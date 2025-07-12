@@ -13,4 +13,5 @@ linker_flags := "-lSDL2 -lSDL2_image -lSDL2_ttf"
 all:
     mkdir -p {{build_dir}}
     {{cc}} {{compiler_flags}} {{linker_flags}} {{include_paths}} {{library_paths}} $(find {{src_dir}} -name '*.c') -o {{build_dir}}/{{obj_name}}
-
+default:
+    clang src/main.c -Iinclude -Iinclude/SDL2 -Llib/SDL2 -lSDL2 -lSDL2_image -lSDL2_ttf -std=c11 -o build/debug/play

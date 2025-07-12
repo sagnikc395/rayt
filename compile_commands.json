@@ -1,0 +1,24 @@
+[
+  {
+    "arguments": [
+      "/opt/homebrew/bin/gcc",
+      "-c",
+      "-std=c11",
+      "-Wall",
+      "-O0",
+      "-g",
+      "-I",
+      "include/SDL2",
+      "-I",
+      "include/SDL2_image",
+      "-I",
+      "include/SDL2_ttf",
+      "-o",
+      "build/debug/play",
+      "src/main.c"
+    ],
+    "directory": "/Users/sagnik3/Developer/Projects/rayt",
+    "file": "/Users/sagnik3/Developer/Projects/rayt/src/main.c",
+    "output": "/Users/sagnik3/Developer/Projects/rayt/build/debug/play"
+  }
+]

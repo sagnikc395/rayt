@@ -1,0 +1,15 @@
+CompileFlags:
+  Add: [
+    "-Iinclude",
+    "-Iinclude/SDL2",
+    "-I/opt/homebrew/Cellar/sdl2/2.32.8/include/SDL2",
+    "-I/opt/homebrew/Cellar/sdl2_image/2.8.8/include/SDL2",
+    "-I/opt/homebrew/Cellar/sdl2_ttf/2.24.0/include/SDL2",
+    "-Llib/SDL2",
+    "-Llib/SDL2_image",
+    "-Llib/SDL2_ttf",
+    "-lSDL2",
+    "-lSDL2_image",
+    "-lSDL2_ttf",
+    "-std=c11"
+  ]
