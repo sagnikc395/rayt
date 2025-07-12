@@ -6,7 +6,7 @@ obj_name := "rayt"
 
 include_paths := "-I include/SDL2 -I include/SDL2_image -I include/SDL2_ttf"
 library_paths := "-L lib/SDL2 -L lib/SDL2_image -L lib/SDL2_ttf"
-compiler_flags := "-std=c11 -Wall -O0 -g"
+compiler_flags := "-std=c11 -Wall -O0 -g -lm"
 linker_flags := "-lSDL2 -lSDL2_image -lSDL2_ttf"
 
 # Build rule

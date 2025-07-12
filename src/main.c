@@ -1,8 +1,28 @@
 #include <SDL.h>
 #include <stdio.h>
+#include <math.h>
 
 #define WIDTH 900
 #define HEIGHT 600
+
+struct Circle{
+    double x;
+    double y;
+    double r;
+};
+
+void FillCircle(SDL_Surface* surface, struct Circle circle,Uint32 color){
+    double radius_squared = pow(circle.r,2);
+    for(double x = circle.x-circle.r;x<= circle.x+circle.r;x++){
+        for(double y=circle.y-circle.r;y<=circle.x+circle.r;y++){
+            double distance_squared = pow(x- circle.x,2.0) + pow(y-circle.y,2.0);
+            if(distance_squared < radius_squared) {
+                SDL_Rect pixel = (SDL_Rect){x,y,1,1};
+                SDL_FillRect(surface, &pixel,color);
+            }
+        }
+    }
+}
 
 
 int main() {
@@ -28,11 +48,16 @@ int main() {
             return 1;
     }
 
+    //create a rectangle
     SDL_Rect rect = (SDL_Rect){200,200,200,200};
+    // define a white
     Uint32 COLOR_WHITE = SDL_MapRGB(surface->format, 255, 255, 255);
 
     //draw something to the surface
     SDL_FillRect(surface, &rect, COLOR_WHITE);
+
+    struct Circle circle= {200,200,80};
+    FillCircle(surface,circle,COLOR_WHITE);
 
     //update window surface
     SDL_UpdateWindowSurface(window);
