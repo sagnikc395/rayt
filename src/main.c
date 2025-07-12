@@ -53,6 +53,11 @@ int main() {
     // SDL_Rect rect = (SDL_Rect){200,200,200,200};
     // define a white
     Uint32 COLOR_WHITE = SDL_MapRGB(surface->format, 255, 255, 255);
+    //define color black
+    Uint32 COLOR_BLACK = SDL_MapRGB(surface->format,0,0,0);
+
+    //x,y 0,0 as we have to cover the top corners
+    SDL_Rect erase_rect = (SDL_Rect){0,0,WIDTH,HEIGHT};
 
     //draw something to the surface
     // SDL_FillRect(surface, &rect, COLOR_WHITE);
@@ -67,11 +72,19 @@ int main() {
     bool simulation_running = true;
     SDL_Event event;
     while(simulation_running){
+        // poll for the current independent events
         while(SDL_PollEvent(&event)) {
             if(event.type == SDL_QUIT) {
                 simulation_running = false;
             }
+            if(event.type == SDL_MOUSEMOTION && event.motion.state != 0) {
+                //mouse is clicked and event motion,
+                // can get the x coordinate and send the x coordinate
+                circle.x = event.motion.x;
+                circle.y = event.motion.y;
+            }
         }
+        SDL_FillRect(surface,&erase_rect,COLOR_BLACK);
         FillCircle(surface,circle,COLOR_WHITE);
         //update window surface
         SDL_UpdateWindowSurface(window);
