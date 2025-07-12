@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdbool.h>
 
 #define WIDTH 900
 #define HEIGHT 600
@@ -49,12 +50,12 @@ int main() {
     }
 
     //create a rectangle
-    SDL_Rect rect = (SDL_Rect){200,200,200,200};
+    // SDL_Rect rect = (SDL_Rect){200,200,200,200};
     // define a white
     Uint32 COLOR_WHITE = SDL_MapRGB(surface->format, 255, 255, 255);
 
     //draw something to the surface
-    SDL_FillRect(surface, &rect, COLOR_WHITE);
+    // SDL_FillRect(surface, &rect, COLOR_WHITE);
 
     struct Circle circle= {200,200,80};
     FillCircle(surface,circle,COLOR_WHITE);
@@ -62,17 +63,33 @@ int main() {
     //update window surface
     SDL_UpdateWindowSurface(window);
 
-    //small event loop to keep the window open and responsive
-    SDL_Event e;
-    int quit = 0 ;
-    while(!quit) {
-        while(SDL_PollEvent(&e)){
-            if(e.type == SDL_QUIT) {
-                quit = 1;
+    //redraw the circle ?
+    bool simulation_running = true;
+    SDL_Event event;
+    while(simulation_running){
+        while(SDL_PollEvent(&event)) {
+            if(event.type == SDL_QUIT) {
+                simulation_running = false;
             }
         }
-        SDL_Delay(20); //preventing usy looping
+        FillCircle(surface,circle,COLOR_WHITE);
+        //update window surface
+        SDL_UpdateWindowSurface(window);
+        SDL_Delay(100);
     }
+
+
+    //small event loop to keep the window open and responsive
+    // SDL_Event e;
+    // int quit = 0 ;
+    // while(!quit) {
+    //     while(SDL_PollEvent(&e)){
+    //         if(e.type == SDL_QUIT) {
+    //             quit = 1;
+    //         }
+    //     }
+    //     SDL_Delay(20); //preventing usy looping
+    // }
 
     SDL_DestroyWindow(window);
     SDL_Quit();
