@@ -2,8 +2,13 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#define WIDTH 900
+#define HEIGHT 600
+
+
+
 int main() {
-    printf("Hello, SDL!\n");
+    //printf("Hello, SDL!\n");
 
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -12,7 +17,7 @@ int main() {
     }
 
     // Create a window
-    SDL_Window* window = SDL_CreateWindow("SDL Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    SDL_Window* window = SDL_CreateWindow("rayt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (window == NULL) {
         fprintf(stderr,"SDL_CreateWindow Error: %s\n",SDL_GetError());
         SDL_Quit();
