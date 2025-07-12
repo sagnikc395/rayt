@@ -2,7 +2,7 @@
 src_dir := "src"
 build_dir := "build/debug"
 cc := "gcc"
-obj_name := "play"
+obj_name := "rayt"
 
 include_paths := "-I include/SDL2 -I include/SDL2_image -I include/SDL2_ttf"
 library_paths := "-L lib/SDL2 -L lib/SDL2_image -L lib/SDL2_ttf"
